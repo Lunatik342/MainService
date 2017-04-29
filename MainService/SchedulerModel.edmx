@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище DiplomModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="channel_id" />
+          </Key>
+          <Property Name="channel_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="channel_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="channe_description" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city_name" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="channel_id" Type="bigint" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="70" />
+          <Property Name="event_time" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="creation_time" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="improtance_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Importance">
+          <Key>
+            <PropertyRef Name="importance_id" />
+          </Key>
+          <Property Name="importance_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permition">
+          <Key>
+            <PropertyRef Name="permition_id" />
+          </Key>
+          <Property Name="permition_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="permition_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="permition_description" Type="nvarchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="role_description" Type="nvarchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolePermitions">
+          <Key>
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="permition_id" />
+          </Key>
+          <Property Name="role_id" Type="bigint" Nullable="false" />
+          <Property Name="permition_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="University">
+          <Key>
+            <PropertyRef Name="university_id" />
+          </Key>
+          <Property Name="university_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="short_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="88" Nullable="false" />
+          <Property Name="salt" Type="nchar" MaxLength="88" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="city_id" Type="bigint" />
+          <Property Name="email" Type="nvarchar" MaxLength="254" />
+          <Property Name="phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="university_id" Type="bigint" />
+          <Property Name="group" Type="nvarchar" MaxLength="20" />
+          <Property Name="description" Type="nvarchar" MaxLength="70" />
+          <Property Name="creation_time" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="channel_id" />
+          </Key>
+          <Property Name="user_id" Type="bigint" Nullable="false" />
+          <Property Name="role_id" Type="bigint" Nullable="false" />
+          <Property Name="channel_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="event$channe_eventl_id">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="channel_id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="channel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="event$importance_id">
+          <End Role="Importance" Type="Self.Importance" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Importance">
+              <PropertyRef Name="importance_id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="improtance_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="role_permitions$permition_role_id">
+          <End Role="Permition" Type="Self.Permition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePermitions" Type="Self.RolePermitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permition">
+              <PropertyRef Name="permition_id" />
+            </Principal>
+            <Dependent Role="RolePermitions">
+              <PropertyRef Name="permition_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="role_permitions$role_perm_id">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePermitions" Type="Self.RolePermitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="RolePermitions">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user$city_id">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user$uni_id">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="university_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="university_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role$channel_id">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="channel_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="channel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role$role_id">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role$user_id">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DiplomModelContainer">
+          <EntitySet Name="Channel" EntityType="Self.Channel" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="Importance" EntityType="Self.Importance" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="Permition" EntityType="Self.Permition" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="RolePermitions" EntityType="Self.RolePermitions" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="University" EntityType="Self.University" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="students_scheduler" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="students_scheduler" store:Type="Tables" />
+          <AssociationSet Name="event$channe_eventl_id" Association="Self.event$channe_eventl_id">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="event$importance_id" Association="Self.event$importance_id">
+            <End Role="Importance" EntitySet="Importance" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="role_permitions$permition_role_id" Association="Self.role_permitions$permition_role_id">
+            <End Role="Permition" EntitySet="Permition" />
+            <End Role="RolePermitions" EntitySet="RolePermitions" />
+          </AssociationSet>
+          <AssociationSet Name="role_permitions$role_perm_id" Association="Self.role_permitions$role_perm_id">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RolePermitions" EntitySet="RolePermitions" />
+          </AssociationSet>
+          <AssociationSet Name="user$city_id" Association="Self.user$city_id">
+            <End Role="City" EntitySet="City" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="user$uni_id" Association="Self.user$uni_id">
+            <End Role="University" EntitySet="University" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="user_role$channel_id" Association="Self.user_role$channel_id">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="user_role$role_id" Association="Self.user_role$role_id">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="user_role$user_id" Association="Self.user_role$user_id">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiplomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="channel_id" />
+          </Key>
+          <Property Name="channel_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="channel_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="channe_description" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="Self.event_channe_eventl_id" FromRole="Channel" ToRole="Event" />
+          <NavigationProperty Name="UserRole" Relationship="Self.user_role_channel_id" FromRole="Channel" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city_name" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.user_city_id" FromRole="City" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="channel_id" Type="Int64" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="event_time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="creation_time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="improtance_id" Type="Int64" />
+          <NavigationProperty Name="Channel" Relationship="Self.event_channe_eventl_id" FromRole="Event" ToRole="Channel" />
+          <NavigationProperty Name="Importance" Relationship="Self.event_importance_id" FromRole="Event" ToRole="Importance" />
+        </EntityType>
+        <EntityType Name="Importance">
+          <Key>
+            <PropertyRef Name="importance_id" />
+          </Key>
+          <Property Name="importance_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="Self.event_importance_id" FromRole="Importance" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="University">
+          <Key>
+            <PropertyRef Name="university_id" />
+          </Key>
+          <Property Name="university_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="short_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.user_uni_id" FromRole="University" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickname" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="88" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="salt" Type="String" MaxLength="88" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city_id" Type="Int64" />
+          <Property Name="email" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="university_id" Type="Int64" />
+          <Property Name="group" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="creation_time" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="City" Relationship="Self.user_city_id" FromRole="User" ToRole="City" />
+          <NavigationProperty Name="University" Relationship="Self.user_uni_id" FromRole="User" ToRole="University" />
+          <NavigationProperty Name="UserRole" Relationship="Self.user_role_user_id" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="channel_id" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="role_id" Type="Int64" Nullable="false" />
+          <Property Name="channel_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Channel" Relationship="Self.user_role_channel_id" FromRole="UserRole" ToRole="Channel" />
+          <NavigationProperty Name="User" Relationship="Self.user_role_user_id" FromRole="UserRole" ToRole="User" />
+          <NavigationProperty Name="Role" Relationship="DiplomModel.user_role_role_id" FromRole="UserRole" ToRole="Role" />
+        </EntityType>
+        <Association Name="event_channe_eventl_id">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="channel_id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="channel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role_channel_id">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="channel_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="channel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_city_id">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="event_importance_id">
+          <End Role="Importance" Type="Self.Importance" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Importance">
+              <PropertyRef Name="importance_id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="improtance_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_uni_id">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="university_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="university_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role_user_id">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchedulerContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Channel" EntityType="Self.Channel" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="Importance" EntityType="Self.Importance" />
+          <EntitySet Name="University" EntityType="Self.University" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" />
+          <AssociationSet Name="event_channe_eventl_id" Association="Self.event_channe_eventl_id">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="user_role_channel_id" Association="Self.user_role_channel_id">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="user_city_id" Association="Self.user_city_id">
+            <End Role="City" EntitySet="City" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="event_importance_id" Association="Self.event_importance_id">
+            <End Role="Importance" EntitySet="Importance" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="user_uni_id" Association="Self.user_uni_id">
+            <End Role="University" EntitySet="University" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="user_role_user_id" Association="Self.user_role_user_id">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <EntitySet Name="Permitions" EntityType="DiplomModel.Permition" />
+          <EntitySet Name="Roles" EntityType="DiplomModel.Role" />
+          <AssociationSet Name="user_role_role_id" Association="DiplomModel.user_role_role_id">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="RolePermitions" Association="DiplomModel.RolePermitions">
+            <End Role="Permition" EntitySet="Permitions" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Permition">
+          <Key>
+            <PropertyRef Name="permition_id" />
+          </Key>
+          <Property Name="permition_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="permition_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="permition_description" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="DiplomModel.RolePermitions" FromRole="Permition" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="role_description" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRole" Relationship="DiplomModel.user_role_role_id" FromRole="Role" ToRole="UserRole" />
+          <NavigationProperty Name="Permition" Relationship="DiplomModel.RolePermitions" FromRole="Role" ToRole="Permition" />
+        </EntityType>
+        <Association Name="user_role_role_id">
+          <End Type="DiplomModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="DiplomModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RolePermitions">
+          <End Type="DiplomModel.Permition" Role="Permition" Multiplicity="*" />
+          <End Type="DiplomModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DiplomModelContainer" CdmEntityContainer="SchedulerContext">
+          <EntitySetMapping Name="Channel">
+            <EntityTypeMapping TypeName="DiplomModel.Channel">
+              <MappingFragment StoreEntitySet="Channel">
+                <ScalarProperty Name="channel_id" ColumnName="channel_id" />
+                <ScalarProperty Name="channel_name" ColumnName="channel_name" />
+                <ScalarProperty Name="channe_description" ColumnName="channe_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="DiplomModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="DiplomModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="channel_id" ColumnName="channel_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="event_time" ColumnName="event_time" />
+                <ScalarProperty Name="creation_time" ColumnName="creation_time" />
+                <ScalarProperty Name="improtance_id" ColumnName="improtance_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Importance">
+            <EntityTypeMapping TypeName="DiplomModel.Importance">
+              <MappingFragment StoreEntitySet="Importance">
+                <ScalarProperty Name="importance_id" ColumnName="importance_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="University">
+            <EntityTypeMapping TypeName="DiplomModel.University">
+              <MappingFragment StoreEntitySet="University">
+                <ScalarProperty Name="university_id" ColumnName="university_id" />
+                <ScalarProperty Name="short_name" ColumnName="short_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="DiplomModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="university_id" ColumnName="university_id" />
+                <ScalarProperty Name="group" ColumnName="group" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="creation_time" ColumnName="creation_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="DiplomModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="channel_id" ColumnName="channel_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permitions">
+            <EntityTypeMapping TypeName="DiplomModel.Permition">
+              <MappingFragment StoreEntitySet="Permition">
+                <ScalarProperty Name="permition_description" ColumnName="permition_description" />
+                <ScalarProperty Name="permition_name" ColumnName="permition_name" />
+                <ScalarProperty Name="permition_id" ColumnName="permition_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DiplomModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="role_description" ColumnName="role_description" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RolePermitions" TypeName="DiplomModel.RolePermitions" StoreEntitySet="RolePermitions">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="role_id" ColumnName="role_id" />
+            </EndProperty>
+            <EndProperty Name="Permition">
+              <ScalarProperty Name="permition_id" ColumnName="permition_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

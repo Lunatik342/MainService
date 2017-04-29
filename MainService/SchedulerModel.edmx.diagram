@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b04a78d1d374783b414c8536fe77575" Name="Diagram1">
+        <EntityTypeShape EntityType="DiplomModel.Channel" Width="1.5" PointX="3.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.City" Width="1.5" PointX="1.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Event" Width="1.5" PointX="0.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Importance" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.University" Width="1.5" PointX="1.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.User" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.UserRole" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="DiplomModel.event_channe_eventl_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.user_role_channel_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.user_city_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.event_importance_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.user_uni_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.user_role_user_id" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.role_permitionns_permition_id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DiplomModel.Permition" Width="1.5" PointX="3.375" PointY="7" />
+        <EntityTypeShape EntityType="DiplomModel.Role" Width="1.5" PointX="5.625" PointY="6.875" />
+        <AssociationConnector Association="DiplomModel.user_role_role_id" />
+        <AssociationConnector Association="DiplomModel.RolePermitions" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/MainService" />
+  <xs:element name="GetUserInformation">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="GetUserInformationResult" nillable="true" type="q1:DbRequestResultOfUserDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="user" nillable="true" type="q2:UserCrDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="EditUserResult" nillable="true" type="q3:CrResultOfUserDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateChannel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="channel" nillable="true" type="q4:ChannelDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateChannelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="CreateChannelResult" nillable="true" type="q5:CrResultOfChannelDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChannels">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChannelsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="GetChannelsResult" nillable="true" type="q6:DbRequestResultOfArrayOfChannelRoleDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChannelsUsers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="channelId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetChannelsUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="GetChannelsUsersResult" nillable="true" type="q7:DbRequestResultOfArrayOfUserDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InviteUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:long" />
+        <xs:element minOccurs="0" name="channelId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InviteUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="InviteUserResult" nillable="true" type="q8:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptInvite">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="channelId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptInviteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="AcceptInviteResult" nillable="true" type="q9:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteChannel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="channelId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteChannelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="DeleteChannelResult" nillable="true" type="q10:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUserFromChannel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="channelId" type="xs:long" />
+        <xs:element minOccurs="0" name="targetUserId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUserFromChannelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="DeleteUserFromChannelResult" nillable="true" type="q11:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeUsersRole">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="channelId" type="xs:long" />
+        <xs:element minOccurs="0" name="targetUserId" type="xs:long" />
+        <xs:element minOccurs="0" name="roleId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeUsersRoleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="ChangeUsersRoleResult" nillable="true" type="q12:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="ev" nillable="true" type="q13:EventCrDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateEventResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="CreateEventResult" nillable="true" type="q14:CrResultOfEventDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="evId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteEventResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="DeleteEventResult" nillable="true" type="q15:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="ev" nillable="true" type="q16:EventDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditEventResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="EditEventResult" nillable="true" type="q17:CrResultOfEventDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEvents">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="count" type="xs:int" />
+        <xs:element minOccurs="0" name="offset" type="xs:int" />
+        <xs:element minOccurs="0" name="dateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="channelId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEventsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/MainService" minOccurs="0" name="GetEventsResult" nillable="true" type="q18:DbRequestResultOfArrayOfEventDtoGvCn2ESm" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

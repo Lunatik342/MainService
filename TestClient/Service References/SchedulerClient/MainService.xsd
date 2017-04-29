@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MainService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MainService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="DbRequestResultOfUserDtoGvCn2ESm">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DbRequestResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/MainService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="UserDto" Namespace="http://schemas.datacontract.org/2004/07/MainService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedObject" nillable="true" type="tns:UserDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DbRequestResultOfUserDtoGvCn2ESm" nillable="true" type="tns:DbRequestResultOfUserDtoGvCn2ESm" />
+  <xs:complexType name="ResultBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActionResult" type="tns:ActionResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultBase" nillable="true" type="tns:ResultBase" />
+  <xs:simpleType name="ActionResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="PermissionDenied" />
+      <xs:enumeration value="DatabaseError" />
+      <xs:enumeration value="IncorrectParameter" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ActionResult" nillable="true" type="tns:ActionResult" />
+  <xs:complexType name="UserDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:UserBaseDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Id" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserDto" nillable="true" type="tns:UserDto" />
+  <xs:complexType name="UserBaseDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CityId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UniversityId" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserBaseDto" nillable="true" type="tns:UserBaseDto" />
+  <xs:complexType name="UserCrDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:UserBaseDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserCrDto" nillable="true" type="tns:UserCrDto" />
+  <xs:complexType name="CrResultOfUserDtoGvCn2ESm">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="CrResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/MainService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="UserDto" Namespace="http://schemas.datacontract.org/2004/07/MainService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedObject" nillable="true" type="tns:UserDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CrResultOfUserDtoGvCn2ESm" nillable="true" type="tns:CrResultOfUserDtoGvCn2ESm" />
+  <xs:complexType name="Result">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfError" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Result" nillable="true" type="tns:Result" />
+  <xs:complexType name="ArrayOfError">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Error" nillable="true" type="tns:Error" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfError" nillable="true" type="tns:ArrayOfError" />
+  <xs:complexType name="Error">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CheckStatus" type="tns:CheckStatus" />
+      <xs:element minOccurs="0" name="Variable" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Error" nillable="true" type="tns:Error" />
+  <xs:simpleType name="CheckStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="ArgumentIsNull" />
+      <xs:enumeration value="LenghtIsIncorrect" />
+      <xs:enumeration value="IdDoesNotExist" />
+      <xs:enumeration value="ArgumentDoesNotMatchFormat" />
+      <xs:enumeration value="ArgumentIsNotUnique" />
+      <xs:enumeration value="IncorrectParametr" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CheckStatus" nillable="true" type="tns:CheckStatus" />
+  <xs:complexType name="ChannelDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ChannelCrDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ChannelId" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ChannelDto" nillable="true" type="tns:ChannelDto" />
+  <xs:complexType name="ChannelCrDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChannelCrDto" nillable="true" type="tns:ChannelCrDto" />
+  <xs:complexType name="CrResultOfChannelDtoGvCn2ESm">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="CrResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/MainService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ChannelDto" Namespace="http://schemas.datacontract.org/2004/07/MainService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedObject" nillable="true" type="tns:ChannelDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CrResultOfChannelDtoGvCn2ESm" nillable="true" type="tns:CrResultOfChannelDtoGvCn2ESm" />
+  <xs:complexType name="DbRequestResultOfArrayOfChannelRoleDtoGvCn2ESm">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DbRequestResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/MainService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfChannelRoleDto" Namespace="http://schemas.datacontract.org/2004/07/MainService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedObject" nillable="true" type="tns:ArrayOfChannelRoleDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DbRequestResultOfArrayOfChannelRoleDtoGvCn2ESm" nillable="true" type="tns:DbRequestResultOfArrayOfChannelRoleDtoGvCn2ESm" />
+  <xs:complexType name="ArrayOfChannelRoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ChannelRoleDto" nillable="true" type="tns:ChannelRoleDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfChannelRoleDto" nillable="true" type="tns:ArrayOfChannelRoleDto" />
+  <xs:complexType name="ChannelRoleDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ChannelDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RoleId" type="xs:long" />
+          <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ChannelRoleDto" nillable="true" type="tns:ChannelRoleDto" />
+  <xs:complexType name="DbRequestResultOfArrayOfUserDtoGvCn2ESm">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DbRequestResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/MainService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfUserDto" Namespace="http://schemas.datacontract.org/2004/07/MainService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedObject" nillable="true" type="tns:ArrayOfUserDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DbRequestResultOfArrayOfUserDtoGvCn2ESm" nillable="true" type="tns:DbRequestResultOfArrayOfUserDtoGvCn2ESm" />
+  <xs:complexType name="ArrayOfUserDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDto" nillable="true" type="tns:UserDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserDto" nillable="true" type="tns:ArrayOfUserDto" />
+  <xs:complexType name="EventCrDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChannelId" type="xs:long" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ImportanceId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EventCrDto" nillable="true" type="tns:EventCrDto" />
+  <xs:complexType name="CrResultOfEventDtoGvCn2ESm">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="CrResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/MainService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="EventDto" Namespace="http://schemas.datacontract.org/2004/07/MainService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Result">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedObject" nillable="true" type="tns:EventDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CrResultOfEventDtoGvCn2ESm" nillable="true" type="tns:CrResultOfEventDtoGvCn2ESm" />
+  <xs:complexType name="EventDto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EventCrDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreationTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EventId" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EventDto" nillable="true" type="tns:EventDto" />
+  <xs:complexType name="DbRequestResultOfArrayOfEventDtoGvCn2ESm">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="DbRequestResultOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/MainService" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfEventDto" Namespace="http://schemas.datacontract.org/2004/07/MainService" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CreatedObject" nillable="true" type="tns:ArrayOfEventDto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DbRequestResultOfArrayOfEventDtoGvCn2ESm" nillable="true" type="tns:DbRequestResultOfArrayOfEventDtoGvCn2ESm" />
+  <xs:complexType name="ArrayOfEventDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventDto" nillable="true" type="tns:EventDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventDto" nillable="true" type="tns:ArrayOfEventDto" />
+</xs:schema>

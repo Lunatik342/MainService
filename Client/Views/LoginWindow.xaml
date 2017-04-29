@@ -1,0 +1,48 @@
+﻿<Window x:Class="Client.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="400" Width="400">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="16"></Setter>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Login"/>
+        <TextBlock Grid.Row="1" Grid.Column ="0" Text="Nickname"/>
+        <TextBlock Grid.Row="2" Grid.Column ="0" Text="Password"/>
+        <TextBox  Grid.Row="1" Grid.Column ="1" Margin="20" FontSize="16" Text="{Binding LoginedUser.Nickname ,UpdateSourceTrigger=PropertyChanged}" Width="Auto" Height="Auto"></TextBox>
+        <PasswordBox Password="Asd1" Grid.Row="2" Grid.Column ="1" Margin="20" FontSize="16" x:Name="MyPasswordBox"></PasswordBox>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="20" Command ="{Binding RegisterCommand}">
+                <TextBlock Text="Register"></TextBlock>
+            </Button>
+            <Button Grid.Column="1" Margin="20" Command="{Binding LoginCommand}" CommandParameter= "{Binding ElementName=MyPasswordBox}">
+                <TextBlock Text="Login"></TextBlock>
+            </Button>
+        </Grid>
+        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0" Text="{Binding ErrorMessage}"> </TextBlock>
+    </Grid>
+</Window>

@@ -1,0 +1,92 @@
+﻿<Window
+    x:Class="Client.Views.EventCreationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Client.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    Title="EventCreationWindow"
+    Width="480"
+    Height="370"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="10,9,5,10" />
+        </Style>
+        <Style x:Key="ErrorStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Margin" Value="10,0,30,0" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="Foreground" Value="Crimson" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="10,0,30,0" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" MinWidth="150" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="25">
+            Add event
+        </TextBlock>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Orientation="Vertical">
+            <TextBlock>Title:</TextBlock>
+            <TextBlock>Description:</TextBlock>
+            <TextBlock Margin="10,77,30,0">Date and time:</TextBlock>
+            <TextBlock Margin="10,23,30,0">Importance:</TextBlock>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Orientation="Vertical">
+            <TextBox Margin="10,9,30,0" FontSize="16" Text="{Binding Event.Title}" MaxLength="20"/>
+            <TextBlock Style="{StaticResource ErrorStyle}" Text="{Binding Errors.TitleError}"/>
+            <TextBox Margin="10,0,30,0" FontSize="16" Text="{Binding Event.Description}" MaxLength="70" MinHeight="90" TextWrapping="Wrap"/>
+            <TextBlock Style="{StaticResource ErrorStyle}" Text="{Binding Errors.DescriptionError}" />
+            <xctk:DateTimePicker FontSize="16" Margin="10,0,30,0"  Value="{Binding Event.EventTime, Mode=TwoWay}" AllowTextInput="False"/>
+            <TextBlock Style="{StaticResource ErrorStyle}" Text="{Binding Errors.EventTimeError}" />
+            <ComboBox FontSize="16" Margin="10,0,30,0" ItemsSource="{Binding ImportanceScale}" SelectedItem="{Binding SelectedImportance}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=ImportanceDescription}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Style="{StaticResource ErrorStyle}" Text="{Binding Errors.ImportanceError}" />
+        </StackPanel>
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="100,7,30,13"
+            Command="{Binding CreateEventCommand}"
+            FontSize="16">
+            Create
+        </Button>
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            FontSize="18"
+            Foreground="{Binding ForegroundColor}"
+            Text="{Binding ActionResult}"
+            TextAlignment="Center" />
+    </Grid>
+</Window>
